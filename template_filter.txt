@@ -1,0 +1,49 @@
+"""Filter module for table {{ in_filter_model }}."""
+######################################
+# This file has been auto generated. #
+######################################
+
+from datetime import datetime
+from typing import Any, List, Optional
+
+from {{ db_schema_location }} import {{ in_filter_model }}
+from pydantic import BaseModel
+
+OFFSET_DEFAULT = 0
+LIMIT_DEFAULT = 50
+
+
+class BaseFilter(BaseModel):
+    """Base filter."""
+
+    offset: int = OFFSET_DEFAULT
+    limit: int = LIMIT_DEFAULT
+
+{% for filter_field in filter_fields %}
+
+class FilterField{{ filter_field.field_name }}(BaseModel):
+    """Filter field class."""
+
+    name: str = '{{ filter_field.in_field_name }}'
+    datatype: Any = {{ filter_field.in_field_datatype }}
+    op: str = '{{ filter_field.in_field_op }}'
+    field_names: Optional[List] = {{ filter_field.in_field_field_names }}
+    field_value: Any
+
+{% endfor %}
+
+class {{ filter_name }}(BaseFilter):
+    """Filter class."""
+
+    name: str = '{{ in_filter_name }}'
+    model: str = {{ in_filter_model }}
+    order_by: Optional[list] = {{ in_filter_order_by }}
+{% for filter_field in filter_fields %}
+    ff_{{ filter_field.filter_field_name|lower }} = FilterField{{ filter_field.field_name }}()
+{% endfor %}
+
+
+######################################
+# This file has been auto generated. #
+######################################
+

@@ -1,0 +1,33 @@
+{
+    "name": "LetterFilter",
+    "for": "Letter",
+    "fields": [
+        {
+            "name": "ts",
+            "op": "..",
+            "type": "Date"
+        },
+        {
+            "name": "term",
+            "op": "T",
+            "type": "String",
+            "fieldNames": ["sender", "to", "subject"]
+        },
+        {
+            "name": "wtf",
+            "op": "custom",
+            "type": "String"
+        },
+        {
+            "name": "sender",
+            "op": "=",
+            "type": "String"
+        },
+        {
+            "name": "sender",
+            "op": "in",
+            "type": "String"
+        }
+    ],
+    "orderBy": "-ts;id"
+}
