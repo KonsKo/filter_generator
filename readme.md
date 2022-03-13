@@ -1,5 +1,7 @@
 # Filter Auto Generator
 
+Generates filter from TypeScript related data to Python-related class.
+
 ## Create filters from json-file(s).
 
 Source file structure must correspond to `filter_source.json`.
